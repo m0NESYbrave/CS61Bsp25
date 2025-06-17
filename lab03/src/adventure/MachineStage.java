@@ -81,11 +81,12 @@ public class MachineStage implements AdventureStage {
      * Returns the maximum integer between a and b.
      */
     public static int mysteryMax(int a, int b) {
-        int w = (b - a) >> 31;
-        int z = ~(b - a) >> 31;
-
-        int max = b & w | a & z;
-        return max;
+//        int w = (b - a) >> 31;
+//        int z = ~(b - a) >> 31;
+//
+//        int max = b & w | a & z;
+//        return max;
+        return Math.max(a, b); // above code returns the min
     }
 
     /**
@@ -132,7 +133,7 @@ public class MachineStage implements AdventureStage {
         int i = 0;
         int sum = 0;
         while (i < x.length) {
-            sum = sum + mysteryAdd(sum, x[i]);
+            sum = mysteryAdd(sum, x[i]); // not sum += ..., this will calculate sum twice
             i = i + 1;
         }
         return sum;
