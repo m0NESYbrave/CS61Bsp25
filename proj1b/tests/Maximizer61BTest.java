@@ -23,7 +23,7 @@ public class Maximizer61BTest {
     }
 
     @Test
-    /** We  */
+    /** We use a cnt to avoid maxItem be null. */
     public void basicTest() {
         ArrayDeque61B<String> ad = new ArrayDeque61B<>();
 
