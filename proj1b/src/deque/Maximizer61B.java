@@ -10,7 +10,21 @@ public class Maximizer61B {
      * @return          the maximum element
      */
     public static <T extends Comparable<T>> T max(Iterable<T> iterable) {
-        return null;
+        if (iterable == null) {
+            return null;
+        }
+        T maxItem = null;
+        int cnt = 0;
+        for (T i : iterable) {
+            if (cnt == 0) {
+                maxItem = i; // maxItem is the first item, it can't be null.
+            }
+            if (i.compareTo(maxItem) > 0) { // T has this method
+                maxItem = i;
+            }
+            cnt++;
+        }
+        return maxItem;
     }
 
     /**
@@ -22,17 +36,21 @@ public class Maximizer61B {
      * @return          the maximum element according to the comparator
      */
     public static <T> T max(Iterable<T> iterable, Comparator<T> comp) {
-        return null;
-    }
+        if (iterable == null) {
+            return null;
+        }
 
-    public static void main(String[] args) {
-        // The style checker will complain about this main method, feel free to delete.
-
-        // ArrayDeque61B<Integer> ad = new ArrayDeque61B<>();
-        // ad.addLast(5);
-        // ad.addLast(12);
-        // ad.addLast(17);
-        // ad.addLast(23);
-        // System.out.println(max(ad));
+        T maxItem = null;
+        int cnt = 0;
+        for (T i : iterable) {
+            if (cnt == 0) {
+                maxItem = i;
+            }
+            if (comp.compare(i, maxItem) > 0) { // T does not have a compareTo() method
+                maxItem = i;
+            }
+            cnt++;
+        }
+        return maxItem;
     }
 }

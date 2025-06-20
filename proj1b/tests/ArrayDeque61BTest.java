@@ -528,4 +528,65 @@ public class ArrayDeque61BTest {
 
 	assertThat(ad1.size()).isEqualTo(0);
     }
+
+    @Test
+    /** This test tests the foreach iteration. */
+    public void iterationTest() {
+	Deque61B<Integer> ad1 = new ArrayDeque61B<>();
+
+	for (int i : ad1) {
+	    System.out.println(i);
+	}
+
+	assertThat(ad1).containsExactly();
+
+	ad1.addLast(0);
+
+	for (int i : ad1) {
+	    System.out.println(i);
+	}
+
+	assertThat(ad1).containsExactly(0);
+
+	ad1.addFirst(1);
+
+	for (int i : ad1) {
+	    System.out.print(i + " ");
+	}
+	System.out.println();
+
+	assertThat(ad1).containsExactly(1, 0).inOrder();
+
+	ad1.addFirst(2);
+	ad1.addFirst(3);
+	ad1.addLast(4);
+
+	for (int i : ad1) {
+	    System.out.print(i + " ");
+	}
+	System.out.println();
+
+	assertThat(ad1).containsExactly(3, 2, 1, 0, 4).inOrder();
+    }
+
+    @Test
+    /** This test tests object methods. */
+    public void objectMethodTest() {
+	Deque61B<Integer> ad1 = new ArrayDeque61B<>();
+	Deque61B<Integer> ad2 = new ArrayDeque61B<>();
+
+	assertThat(ad1).isEqualTo(ad2);
+
+	ad1.addFirst(1);
+	ad1.addFirst(2);
+	ad1.addFirst(3);
+	ad2.addFirst(1);
+	ad2.addFirst(2);
+	ad2.addFirst(3);
+
+	assertThat(ad1).isEqualTo(ad2);
+
+	System.out.println(ad1);
+	System.out.println(ad2);
+    }
 }

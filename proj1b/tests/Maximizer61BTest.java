@@ -15,12 +15,36 @@ public class Maximizer61BTest {
         }
     }
 
-//    @Test
-//    public void basicTest() {
-//        ArrayDeque61B<String> ad = new ArrayDeque61B<>();
-//        ad.addFirst("");
-//        ad.addFirst("2");
-//        ad.addFirst("fury road");
-//        assertThat(Maximizer61B.max(ad, new StringLengthComparator())).isEqualTo("fury road");
-//    }
+    private static class SizeComparator implements Comparator<Integer> {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o1 - o2;
+        }
+    }
+
+    @Test
+    /** We  */
+    public void basicTest() {
+        ArrayDeque61B<String> ad = new ArrayDeque61B<>();
+
+        /* max_empty */
+        assertThat(Maximizer61B.max(ad)).isEqualTo(null);
+        assertThat(Maximizer61B.max(ad, new StringLengthComparator())).isEqualTo(null);
+
+        /* max_nonempty max_default max_different_comp */
+        ad.addFirst("");
+        ad.addFirst("2");
+        ad.addFirst("fury road");
+        assertThat(Maximizer61B.max(ad, new StringLengthComparator())).isEqualTo("fury road");
+        assertThat(Maximizer61B.max(ad)).isEqualTo("fury road");
+
+        ArrayDeque61B<Integer> ad1 = new ArrayDeque61B<>();
+
+        ad1.addLast(1);
+        ad1.addLast(2);
+        ad1.addFirst(3);
+
+        assertThat(Maximizer61B.max(ad1)).isEqualTo(3);
+        assertThat(Maximizer61B.max(ad1, new SizeComparator())).isEqualTo(3);
+    }
 }

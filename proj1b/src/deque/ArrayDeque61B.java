@@ -1,6 +1,7 @@
 package deque;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ArrayDeque61B<T> implements Deque61B<T> {
@@ -146,5 +147,59 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     @Override
     public T getRecursive(int index) {
         throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
+    }
+
+    /** An Iterable must have an Iterator. */
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
+    }
+
+    private class ArrayDequeIterator implements Iterator<T> {
+        int wizPos;
+
+        ArrayDequeIterator() {
+            // wizPos is the position of the first item except empty array.
+            wizPos = Math.floorMod(first + 1, items.length);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return items[wizPos] != null;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = items[wizPos];
+            wizPos++;
+            wizPos = Math.floorMod(wizPos, items.length);
+            return returnItem;
+        }
+    }
+
+    @Override
+    /** Object method which checks the equality of contents. */
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o instanceof ArrayDeque61B<?> otherDeque) {
+            if (size() != otherDeque.size()) {
+                return false;
+            }
+            for (int i = 0; i < size(); i++) {
+                if (!get(i).equals(otherDeque.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return toList().toString(); // List itself does not have this method.
     }
 }
